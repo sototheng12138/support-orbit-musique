@@ -1,0 +1,386 @@
+{
+  "builder_version": "2.0.0",
+  "component_isolation": {
+    "component_key_families": [
+      "decomposition source IDs",
+      "raw C support paragraph-text SHA256",
+      "NFKC/casefold/token-normalized answers, both alias lists, and subanswers"
+    ],
+    "component_size_histogram": {
+      "1": 49,
+      "10": 12,
+      "100": 1,
+      "101": 2,
+      "11": 11,
+      "12": 8,
+      "12844": 1,
+      "13": 8,
+      "137": 1,
+      "14": 9,
+      "15": 4,
+      "16": 4,
+      "160": 1,
+      "17": 3,
+      "18": 2,
+      "19": 1,
+      "2": 33,
+      "20": 5,
+      "21": 3,
+      "22": 4,
+      "23": 6,
+      "24": 11,
+      "25": 21,
+      "26": 5,
+      "27": 1,
+      "28": 3,
+      "29": 3,
+      "3": 13,
+      "32": 3,
+      "36": 1,
+      "37": 3,
+      "38": 2,
+      "4": 13,
+      "42": 3,
+      "44": 1,
+      "48": 1,
+      "49": 1,
+      "5": 12,
+      "50": 4,
+      "54": 3,
+      "56": 2,
+      "57": 1,
+      "59": 2,
+      "6": 14,
+      "62": 1,
+      "63": 2,
+      "67": 2,
+      "68": 2,
+      "69": 1,
+      "7": 10,
+      "73": 2,
+      "75": 3,
+      "76": 2,
+      "78": 1,
+      "8": 9,
+      "9": 5,
+      "90": 1,
+      "98": 1
+    },
+    "components": 333,
+    "cross_split_key_overlap_counts": {
+      "dev-shadow": 0,
+      "train-dev": 0,
+      "train-shadow": 0
+    },
+    "split_component_counts": {
+      "dev": 17,
+      "shadow": 26,
+      "train": 103
+    },
+    "whole_components_only": true
+  },
+  "construction": {
+    "all_invariants_pass": true,
+    "answer_alias_policy": {
+      "C_and_D": "exact complete-row answer_aliases only",
+      "M": "exact missing-row answer_aliases only",
+      "counts_by_split": {
+        "dev": {
+          "C_only_normalized_alias_values": 59,
+          "M_only_normalized_alias_values": 4,
+          "orbits_with_C_only_normalized_aliases": 59,
+          "orbits_with_M_only_normalized_aliases": 4,
+          "orbits_with_different_raw_alias_lists": 60
+        },
+        "shadow": {
+          "C_only_normalized_alias_values": 81,
+          "M_only_normalized_alias_values": 0,
+          "orbits_with_C_only_normalized_aliases": 71,
+          "orbits_with_M_only_normalized_aliases": 0,
+          "orbits_with_different_raw_alias_lists": 71
+        },
+        "train": {
+          "C_only_normalized_alias_values": 554,
+          "M_only_normalized_alias_values": 6,
+          "orbits_with_C_only_normalized_aliases": 450,
+          "orbits_with_M_only_normalized_aliases": 4,
+          "orbits_with_different_raw_alias_lists": 460
+        }
+      },
+      "leakage_components": "union of complete and missing normalized aliases"
+    },
+    "donor_joint_cost": {
+      "max": 1.112309432680793,
+      "mean": 0.13917457163731334
+    },
+    "donor_length_ratio": {
+      "ceiling": 1.25,
+      "max": 1.25,
+      "mean": 1.0249565196971375,
+      "violations": 0
+    },
+    "donor_matching_cost_formula": "local=50*duplicate_delta + 10*question_doc_jaccard_delta + 6*question_title_jaccard_delta + 3*coherence_delta + 2*abs(log(token_length_ratio)) - 0.5*old_donor_token_jaccard; joint=relative_surface_distance + relative_question_overlap_distance + 0.01*sum(local)",
+    "invariant_counts": {
+      "orbits_with_byte_identical_support_in_C_and_D": 2720,
+      "orbits_with_exact_C_and_D_target": 2720,
+      "orbits_with_exactly_two_nonsupport_replacements": 2720,
+      "orbits_with_no_C_support_text_as_donor": 2720,
+      "orbits_with_same_split_donors": 2720,
+      "orbits_with_state_specific_official_aliases": 2720
+    }
+  },
+  "release_gate": {
+    "construction_invariants_pass": true,
+    "semantic_C_D_probe_pass": true,
+    "status": "READY",
+    "surface_probe_pass": true,
+    "zero_truncation_pass": true
+  },
+  "schema_version": "support-orbit-musique/v2",
+  "separability_probes": {
+    "policy": {
+      "semantic": "C-D separability AUC must be <= 0.60; D-M and C-M are diagnostic because missing support is a real semantic signal",
+      "separability_auc": "max(raw ROC AUC, 1 - raw ROC AUC)",
+      "shadow": "sealed shadow records excluded from every learned probe",
+      "surface_only": "C-D, D-M, and C-M separability AUC must each be <= 0.60"
+    },
+    "semantic_C_D_gate_pass": true,
+    "semantic_question_overlap": {
+      "classifier": {
+        "C": 1.0,
+        "fold_assignment": "SHA256(seed + newline + orbit_id), sorted, round-robin",
+        "folds": 5,
+        "grouping": "all states of an orbit remain in one fold",
+        "max_iter": 2000,
+        "numpy_version": "2.4.6",
+        "pipeline": "StandardScaler -> LogisticRegression",
+        "random_state": 1729,
+        "sklearn_version": "1.8.0",
+        "solver": "liblinear"
+      },
+      "feature_count": 23,
+      "feature_family": "semantic_question_overlap",
+      "feature_names": [
+        "document_count",
+        "total_characters",
+        "mean_document_characters",
+        "std_document_characters",
+        "min_document_characters",
+        "max_document_characters",
+        "total_word_tokens",
+        "mean_document_tokens",
+        "std_document_tokens",
+        "mean_title_tokens",
+        "std_title_tokens",
+        "exact_title_duplicate_fraction",
+        "exact_text_duplicate_fraction",
+        "mean_pairwise_title_jaccard",
+        "mean_pairwise_text_jaccard",
+        "digit_character_fraction",
+        "punctuation_character_fraction",
+        "slot_length_slope",
+        "question_document_jaccard_mean",
+        "question_document_jaccard_max",
+        "question_document_jaccard_top2_sum",
+        "question_title_jaccard_max",
+        "question_overlap_document_fraction"
+      ],
+      "pairs": {
+        "C-D": {
+          "examples": 4640,
+          "fold_orbit_counts": {
+            "0": 464,
+            "1": 464,
+            "2": 464,
+            "3": 464,
+            "4": 464
+          },
+          "orbits": 2320,
+          "raw_auc": 0.5431179399524376,
+          "separability_auc": 0.5431179399524376
+        },
+        "C-M": {
+          "examples": 4640,
+          "fold_orbit_counts": {
+            "0": 464,
+            "1": 464,
+            "2": 464,
+            "3": 464,
+            "4": 464
+          },
+          "orbits": 2320,
+          "raw_auc": 0.6346356643876339,
+          "separability_auc": 0.6346356643876339
+        },
+        "D-M": {
+          "examples": 4640,
+          "fold_orbit_counts": {
+            "0": 464,
+            "1": 464,
+            "2": 464,
+            "3": 464,
+            "4": 464
+          },
+          "orbits": 2320,
+          "raw_auc": 0.6330040502378121,
+          "separability_auc": 0.6330040502378121
+        }
+      },
+      "shadow_excluded": true
+    },
+    "surface_gate_pass": true,
+    "surface_only": {
+      "classifier": {
+        "C": 1.0,
+        "fold_assignment": "SHA256(seed + newline + orbit_id), sorted, round-robin",
+        "folds": 5,
+        "grouping": "all states of an orbit remain in one fold",
+        "max_iter": 2000,
+        "numpy_version": "2.4.6",
+        "pipeline": "StandardScaler -> LogisticRegression",
+        "random_state": 1729,
+        "sklearn_version": "1.8.0",
+        "solver": "liblinear"
+      },
+      "feature_count": 18,
+      "feature_family": "surface_only",
+      "feature_names": [
+        "document_count",
+        "total_characters",
+        "mean_document_characters",
+        "std_document_characters",
+        "min_document_characters",
+        "max_document_characters",
+        "total_word_tokens",
+        "mean_document_tokens",
+        "std_document_tokens",
+        "mean_title_tokens",
+        "std_title_tokens",
+        "exact_title_duplicate_fraction",
+        "exact_text_duplicate_fraction",
+        "mean_pairwise_title_jaccard",
+        "mean_pairwise_text_jaccard",
+        "digit_character_fraction",
+        "punctuation_character_fraction",
+        "slot_length_slope"
+      ],
+      "pairs": {
+        "C-D": {
+          "examples": 4640,
+          "fold_orbit_counts": {
+            "0": 464,
+            "1": 464,
+            "2": 464,
+            "3": 464,
+            "4": 464
+          },
+          "orbits": 2320,
+          "raw_auc": 0.539688057372176,
+          "separability_auc": 0.539688057372176
+        },
+        "C-M": {
+          "examples": 4640,
+          "fold_orbit_counts": {
+            "0": 464,
+            "1": 464,
+            "2": 464,
+            "3": 464,
+            "4": 464
+          },
+          "orbits": 2320,
+          "raw_auc": 0.5609135329964328,
+          "separability_auc": 0.5609135329964328
+        },
+        "D-M": {
+          "examples": 4640,
+          "fold_orbit_counts": {
+            "0": 464,
+            "1": 464,
+            "2": 464,
+            "3": 464,
+            "4": 464
+          },
+          "orbits": 2320,
+          "raw_auc": 0.5592969678953628,
+          "separability_auc": 0.5592969678953628
+        }
+      },
+      "shadow_excluded": true
+    }
+  },
+  "source_validation": {
+    "eligibility_definition": {
+      "complete_support": "every C decomposition support index points to a supporting paragraph, and the referenced-index set equals the C supporting-flag set",
+      "missing_subanswer": "NFKC -> casefold -> Unicode regex \\w+ tokens; at least one decomposition answer token sequence is absent from the concatenated M title+paragraph stream",
+      "missing_support": "M omits at least one raw-text SHA256 from C support",
+      "paragraphs": "C and M each have exactly 20 unique slots numbered 0..19",
+      "raw_substring_rule_rejected": "A prior diagnostic count of 18,800 used raw substring matching and falsely treated forms such as America/American as matches; it is not used."
+    },
+    "eligibility_reason_counts": {
+      "eligible": 18834,
+      "missing_world_contains_every_subanswer_token_sequence": 1060,
+      "not_exactly_20_paragraphs": 44
+    },
+    "missing_complete_support_count_histogram": {
+      "1": 10712,
+      "2": 8991,
+      "3": 185,
+      "4": 6
+    },
+    "missing_subanswer_count_histogram": {
+      "0": 1060,
+      "1": 11478,
+      "2": 7187,
+      "3": 163,
+      "4": 6
+    },
+    "pair_validation": {
+      "alias_lists_allowed_to_differ": true,
+      "exactly_two_rows_per_id": true,
+      "one_answerable_and_one_unanswerable": true,
+      "pairs_with_different_alias_lists": 3756,
+      "same_question_answer_decomposition": true
+    },
+    "source_pairs": 19938,
+    "source_rows": 39876,
+    "source_sha256": "b1cd998f7e0e2838d6fda024e4ad1eb0e7fc3edefdadb0bd9b5b10b0907f2034",
+    "strict_eligible_orbits": 18834
+  },
+  "tokenizer_length": {
+    "format": "formatting.render_state -> sft.encode_state",
+    "identity_sha256": {
+      "config.json": "5beea1a4a34c62782bfb2f911c606741a3bab8f92d80a118fa053c28af12e8ba",
+      "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+      "tokenizer_config.json": "a62ff0a2472a0fa1b8eaabcb57c59b58afa42a22831dc141400b6e0cf2b65ce3"
+    },
+    "max_allowed_tokens": 6144,
+    "max_tokens": 4974,
+    "min_tokens": 1067,
+    "native_chat_template": {
+      "add_generation_prompt": true,
+      "completion_only_labels": true,
+      "enable_thinking": false
+    },
+    "over_limit_records": 0,
+    "p50_tokens": 2388,
+    "p95_tokens": 3373,
+    "p99_tokens": 3852,
+    "prepared_contract_byte_identical": true,
+    "prepared_vs_canonical_mismatches": 0,
+    "records": 6960,
+    "shadow_excluded": true,
+    "split_max_tokens": {
+      "dev": 4780,
+      "train": 4974
+    },
+    "splits": [
+      "train",
+      "dev"
+    ],
+    "tokenizer_class": "Qwen2TokenizerFast",
+    "tokenizer_path": "/home/hesong/AI-Agent-Projects/models/Qwen3-4B-Instruct-2507",
+    "transformers_version": "4.57.3",
+    "truncation": "forbidden; strict encoder raises over max_length",
+    "zero_truncation_pass": true
+  }
+}

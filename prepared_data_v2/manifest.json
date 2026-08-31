@@ -1,0 +1,213 @@
+{
+  "artifact_sha256": {
+    "SHADOW_SEALED.json": "5e6288ef3d7e35ebd9c6c5d3812895f0a812106913b5fb357ae4e96052af5bd5",
+    "audit.json": "462acaada470b7b49b5fbe74c990810714b6a8b9bcaa1b0cd6b97b801a957a6e",
+    "dev.jsonl": "84acfa99def02660aa74d836f07ff4219c0c838c29e19d7d335a126c7840b909",
+    "dev.jsonl.sha256": "0ec2f1ed612cfaa9566eebe6cc76adad099840a5d8b30304ef071bf6cbdc9d0e",
+    "rejection_ledger.json": "61843c2bc7ba1bdec37f235580e34728b0c9017fa44f264bbe7e18fb8450ff77",
+    "shadow.sealed.jsonl": "1eed3236bb17e79518ae5c3787f3171a37eaea1bfec8f6f46766a59ce2e1d293",
+    "shadow.sealed.jsonl.sha256": "81570ec99e9f01f55c61050e46eb3a155d8579574fcbc72733457de0feefecb7",
+    "train.jsonl": "641bae95c4eb410229fb8c87a52b24e58628c376c636632d242115ca7e4d5c12",
+    "train.jsonl.sha256": "fe158e0fa881d10673c311cdc68acef7f3705a208077ad1cc26f73502c95d81d"
+  },
+  "builder_version": "2.0.0",
+  "construction": {
+    "C": "official answerable row; official answer target",
+    "D": "copy C and replace exactly two non-support slots with leak-filtered, length/coherence/overlap-matched C-nonsupport donors from the same split; copy C target unchanged",
+    "M": "official paired unanswerable row; fixed exact refusal target",
+    "fixed_refusal": "U | evidence=[] | answer=INSUFFICIENT_EVIDENCE",
+    "model_generated_labels": false,
+    "paragraph_slots_per_state": 20,
+    "states_per_orbit": 3
+  },
+  "counts": {
+    "dev_orbits": 400,
+    "dev_records": 1200,
+    "minimum_gate": {
+      "dev_orbits": 160,
+      "shadow_orbits": 160,
+      "train_orbits": 640
+    },
+    "minimum_gate_exceeded": true,
+    "selected_orbits": 2720,
+    "shadow_orbits": 400,
+    "shadow_records": 1200,
+    "strict_eligible_orbits": 18834,
+    "train_orbits": 1920,
+    "train_records": 5760
+  },
+  "input_policy": {
+    "allowed": "/home/hesong/AI-Agent-Projects/data/musique_official/train_only/musique_full_v1.0_train.jsonl",
+    "forbidden": [
+      "archive body",
+      "official dev",
+      "official test",
+      "network"
+    ],
+    "source_path_and_sha_enforced": true
+  },
+  "leakage_policy": {
+    "component_key_families": [
+      "decomposition source IDs",
+      "raw C support paragraph-text SHA256",
+      "NFKC/casefold/token-normalized answers, both alias lists, and subanswers"
+    ],
+    "component_size_histogram": {
+      "1": 49,
+      "10": 12,
+      "100": 1,
+      "101": 2,
+      "11": 11,
+      "12": 8,
+      "12844": 1,
+      "13": 8,
+      "137": 1,
+      "14": 9,
+      "15": 4,
+      "16": 4,
+      "160": 1,
+      "17": 3,
+      "18": 2,
+      "19": 1,
+      "2": 33,
+      "20": 5,
+      "21": 3,
+      "22": 4,
+      "23": 6,
+      "24": 11,
+      "25": 21,
+      "26": 5,
+      "27": 1,
+      "28": 3,
+      "29": 3,
+      "3": 13,
+      "32": 3,
+      "36": 1,
+      "37": 3,
+      "38": 2,
+      "4": 13,
+      "42": 3,
+      "44": 1,
+      "48": 1,
+      "49": 1,
+      "5": 12,
+      "50": 4,
+      "54": 3,
+      "56": 2,
+      "57": 1,
+      "59": 2,
+      "6": 14,
+      "62": 1,
+      "63": 2,
+      "67": 2,
+      "68": 2,
+      "69": 1,
+      "7": 10,
+      "73": 2,
+      "75": 3,
+      "76": 2,
+      "78": 1,
+      "8": 9,
+      "9": 5,
+      "90": 1,
+      "98": 1
+    },
+    "components": 333,
+    "cross_split_key_overlap_counts": {
+      "dev-shadow": 0,
+      "train-dev": 0,
+      "train-shadow": 0
+    },
+    "split_component_counts": {
+      "dev": 17,
+      "shadow": 26,
+      "train": 103
+    },
+    "whole_components_only": true
+  },
+  "record_contract": {
+    "required_eval_keys": [
+      "id",
+      "orbit_id",
+      "source_id",
+      "state",
+      "answer",
+      "answer_aliases",
+      "gold_support_idxs",
+      "answerable"
+    ],
+    "state_values": [
+      "C",
+      "D",
+      "M"
+    ],
+    "unique_id": "orbit_id::state"
+  },
+  "release_gate": {
+    "construction_invariants_pass": true,
+    "semantic_C_D_probe_pass": true,
+    "status": "READY",
+    "surface_probe_pass": true,
+    "zero_truncation_pass": true
+  },
+  "schema_version": "support-orbit-musique/v2",
+  "selection_seed": "support-orbit-musique-v1",
+  "shadow_policy": {
+    "artifact": "shadow.sealed.jsonl",
+    "bytes": 38568030,
+    "orbit_count": 400,
+    "policy": "Generated once; body must not be opened for training, model selection, threshold tuning, prompt tuning, or learned data diagnostics.",
+    "record_count": 1200,
+    "schema_version": "support-orbit-musique/v2",
+    "sealed": true,
+    "sha256": "1eed3236bb17e79518ae5c3787f3171a37eaea1bfec8f6f46766a59ce2e1d293",
+    "training_read_allowed": false
+  },
+  "source": {
+    "commit": "922ac98f19a201998dbdae6d7f2887a5258dbdeb",
+    "dataset": "MuSiQue full v1.0 train",
+    "license": "CC-BY-4.0",
+    "pairs": 19938,
+    "path": "/home/hesong/AI-Agent-Projects/data/musique_official/train_only/musique_full_v1.0_train.jsonl",
+    "repository": "StonyBrookNLP/musique",
+    "rows": 39876,
+    "sha256": "b1cd998f7e0e2838d6fda024e4ad1eb0e7fc3edefdadb0bd9b5b10b0907f2034"
+  },
+  "tokenizer_audit": {
+    "format": "formatting.render_state -> sft.encode_state",
+    "identity_sha256": {
+      "config.json": "5beea1a4a34c62782bfb2f911c606741a3bab8f92d80a118fa053c28af12e8ba",
+      "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+      "tokenizer_config.json": "a62ff0a2472a0fa1b8eaabcb57c59b58afa42a22831dc141400b6e0cf2b65ce3"
+    },
+    "max_allowed_tokens": 6144,
+    "max_tokens": 4974,
+    "min_tokens": 1067,
+    "native_chat_template": {
+      "add_generation_prompt": true,
+      "completion_only_labels": true,
+      "enable_thinking": false
+    },
+    "over_limit_records": 0,
+    "p50_tokens": 2388,
+    "p95_tokens": 3373,
+    "p99_tokens": 3852,
+    "prepared_contract_byte_identical": true,
+    "prepared_vs_canonical_mismatches": 0,
+    "records": 6960,
+    "shadow_excluded": true,
+    "split_max_tokens": {
+      "dev": 4780,
+      "train": 4974
+    },
+    "splits": [
+      "train",
+      "dev"
+    ],
+    "tokenizer_class": "Qwen2TokenizerFast",
+    "tokenizer_path": "/home/hesong/AI-Agent-Projects/models/Qwen3-4B-Instruct-2507",
+    "transformers_version": "4.57.3",
+    "truncation": "forbidden; strict encoder raises over max_length",
+    "zero_truncation_pass": true
+  }
+}

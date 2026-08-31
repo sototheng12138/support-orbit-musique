@@ -1,0 +1,165 @@
+{
+  "bootstrap": {
+    "samples": 10000,
+    "seed": 20260814,
+    "unit": "orbit"
+  },
+  "counts": {
+    "paired_orbits": 400
+  },
+  "decision": "STOP",
+  "diagnostics": {
+    "checkpoints_distinct": true
+  },
+  "gates": {
+    "c_answer_f1_noninferiority": {
+      "passed": false,
+      "rule": "delta>=-0.02"
+    },
+    "cd_min_f1_gain": {
+      "passed": false,
+      "rule": "delta>=0.04 and paired_bootstrap_ci_low>0"
+    },
+    "d_answer_f1_gain": {
+      "passed": false,
+      "rule": "delta>=0.04"
+    },
+    "false_refusal_noninferiority": {
+      "passed": false,
+      "rule": "delta<=0.02"
+    },
+    "m_refusal": {
+      "passed": true,
+      "rule": "delta>=0 and treatment>=0.80"
+    },
+    "orbit_answer_suff_gain": {
+      "passed": false,
+      "rule": "delta>=0.04 and paired_bootstrap_ci_low>0"
+    },
+    "orbit_support_suff_noninferiority": {
+      "passed": false,
+      "rule": "delta>=-0.02"
+    },
+    "parse_rate": {
+      "passed": true,
+      "rule": "treatment>=0.99"
+    },
+    "run_integrity": {
+      "passed": true,
+      "rule": "all checks true"
+    }
+  },
+  "integrity_checks": {
+    "arm_roles_exact": true,
+    "control_run_integrity": true,
+    "dataset_manifest_exact": true,
+    "orbit_ids_exact": true,
+    "protocol_exact": true,
+    "schema_match": true,
+    "split_artifact_exact": true,
+    "treatment_run_integrity": true
+  },
+  "metrics": {
+    "c_answer_f1": {
+      "ci_high": -0.012012500000000002,
+      "ci_high_pp": -1.2012500000000002,
+      "ci_low": -0.09691666666666666,
+      "ci_low_pp": -9.691666666666666,
+      "control": 0.6104615384615384,
+      "delta": -0.053762820512820504,
+      "delta_pp": -5.37628205128205,
+      "treatment": 0.556698717948718
+    },
+    "cd_min_f1": {
+      "ci_high": -0.027179487179487177,
+      "ci_high_pp": -2.7179487179487176,
+      "ci_low": -0.1096815705128205,
+      "ci_low_pp": -10.96815705128205,
+      "control": 0.5943782051282052,
+      "delta": -0.06809615384615383,
+      "delta_pp": -6.809615384615383,
+      "treatment": 0.5262820512820512
+    },
+    "d_answer_f1": {
+      "ci_high": -0.02408333333333333,
+      "ci_high_pp": -2.408333333333333,
+      "ci_low": -0.10459615384615384,
+      "ci_low_pp": -10.459615384615384,
+      "control": 0.6372948717948718,
+      "delta": -0.06409615384615384,
+      "delta_pp": -6.4096153846153845,
+      "treatment": 0.573198717948718
+    },
+    "false_refusal_rate": {
+      "ci_high": 0.10625,
+      "ci_high_pp": 10.625,
+      "ci_low": 0.0425,
+      "ci_low_pp": 4.25,
+      "control": 0.105,
+      "delta": 0.07375,
+      "delta_pp": 7.375,
+      "treatment": 0.17875
+    },
+    "m_refusal_rate": {
+      "ci_high": 0.02,
+      "ci_high_pp": 2.0,
+      "ci_low": -0.02,
+      "ci_low_pp": -2.0,
+      "control": 0.86,
+      "delta": 0.0,
+      "delta_pp": 0.0,
+      "treatment": 0.86
+    },
+    "orbit_answer_suff_f1": {
+      "ci_high": -0.029871474358974363,
+      "ci_high_pp": -2.987147435897436,
+      "ci_low": -0.1104551282051282,
+      "ci_low_pp": -11.04551282051282,
+      "control": 0.5374871794871795,
+      "delta": -0.0699551282051282,
+      "delta_pp": -6.99551282051282,
+      "treatment": 0.4675320512820512
+    },
+    "orbit_support_suff_f1": {
+      "ci_high": -0.048993750000000086,
+      "ci_high_pp": -4.899375000000009,
+      "ci_low": -0.12325,
+      "ci_low_pp": -12.325,
+      "control": 0.69525,
+      "delta": -0.0855,
+      "delta_pp": -8.55,
+      "treatment": 0.6097499999999999
+    },
+    "parse_rate": {
+      "ci_high": 0.0008333333333333334,
+      "ci_high_pp": 0.08333333333333334,
+      "ci_low": -0.0075,
+      "ci_low_pp": -0.75,
+      "control": 0.9991666666666665,
+      "delta": -0.0025,
+      "delta_pp": -0.25,
+      "treatment": 0.9966666666666667
+    }
+  },
+  "production": {
+    "control_evaluation": {
+      "path": "runs/pilot_v2_seed17/control_dev_evaluation/evaluation.json (not published)",
+      "sha256": "9a30472a25be6073d9c9bf9b1ade33a4015bb7590e1b6ae3bb15b60a278bb7ee"
+    },
+    "control_generation_manifest_sha256": "ccc1e196eb4b8ea3dc74a6378ffeb7bdc54ae2453f9eb8128c63da4f19bfb37f",
+    "hoppair_evaluation": {
+      "path": "runs/pilot_v2_seed17/hoppair_dev_evaluation/evaluation.json (not published)",
+      "sha256": "3d66abb5f20b30f445e773135fe3b64ec5bf145dc89d45e1540528b51b1039a6"
+    },
+    "hoppair_generation_manifest_sha256": "6ca3fc990fde044fadc60e7ce54f0998e8742cdda3072c66b97bd92b7cc09381",
+    "launch_receipt": {
+      "path": "protocols/pilot_v2_launch_receipt.json",
+      "sha256": "ee0b6c1533efa19668d0e349f96e84113dd3ba012de199fe65ca9d8a6ddbf2dd"
+    },
+    "roles": {
+      "control": "CONTROL",
+      "treatment": "HopPAIR"
+    }
+  },
+  "schema_version": "support-orbit-comparison-v1"
+}

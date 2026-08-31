@@ -1,0 +1,11 @@
+{
+  "artifact": "shadow.sealed.jsonl",
+  "bytes": 38568030,
+  "orbit_count": 400,
+  "policy": "Generated once; body must not be opened for training, model selection, threshold tuning, prompt tuning, or learned data diagnostics.",
+  "record_count": 1200,
+  "schema_version": "support-orbit-musique/v2",
+  "sealed": true,
+  "sha256": "1eed3236bb17e79518ae5c3787f3171a37eaea1bfec8f6f46766a59ce2e1d293",
+  "training_read_allowed": false
+}

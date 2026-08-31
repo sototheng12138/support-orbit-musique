@@ -1,0 +1,17 @@
+SupportOrbit-MuSiQue
+Copyright (c) 2026 Hesong Zhao
+
+The software in this repository is released under the MIT License.
+
+The research pipeline targets the MuSiQue dataset:
+
+  Harsh Trivedi, Niranjan Balasubramanian, Tushar Khot, and Ashish Sabharwal.
+  MuSiQue: Multihop Questions via Single-hop Question Composition. TACL 2022.
+  https://github.com/StonyBrookNLP/musique
+
+MuSiQue is distributed by its authors under CC BY 4.0. No MuSiQue source rows
+or derived train/dev/shadow JSONL files are included in this repository.
+Users must obtain the dataset from the official source and comply with its
+license. SOURCE_PROVENANCE.md records the exact upstream revision and source
+hash used by the reported pilot.
+

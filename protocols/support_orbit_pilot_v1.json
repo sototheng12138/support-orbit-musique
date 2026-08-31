@@ -1,0 +1,485 @@
+{
+  "schema_version": "support-orbit-musique.protocol/v1",
+  "protocol_id": "support_orbit_musique_pilot_v1",
+  "protocol_status": "FROZEN_PRE_GPU",
+  "frozen_on": "2026-08-14",
+  "launch_status": "STOP_BEFORE_GPU",
+  "status_semantics": {
+    "freeze_rule": "FROZEN_PRE_GPU was permitted only after the exact prepared manifest, construction gates, learned AUC probes, and tokenizer audit all validated.",
+    "launch_rule": "The frozen protocol never authorizes a GPU by itself; a separate fail-closed launch receipt must bind data, model, tokenizer, code, schedule, environment, and tests.",
+    "default_on_missing_or_mismatch": "STOP_BEFORE_GPU",
+    "amendment_policy": "After freezing, never edit this file in place; create a versioned amendment before any affected run."
+  },
+  "objective": {
+    "question": "Does one-way support-preserving consistency regularization improve multi-hop answer and evidence stability under non-support document replacement while retaining clean-context answering and evidence-insufficiency refusal?",
+    "comparison": "CONTROL_vs_HopPAIR",
+    "scope": "MuSiQue-train-derived internal development pilot",
+    "training_class": "parameter-efficient supervised post-training with deterministic auxiliary regularization",
+    "prohibited": [
+      "DPO",
+      "ORPO",
+      "KTO",
+      "PPO",
+      "GRPO",
+      "DAPO",
+      "reward-model training",
+      "preference optimization",
+      "checkpoint selection on dev, shadow, or official data"
+    ]
+  },
+  "source_lock": {
+    "dataset": "MuSiQue full v1.0",
+    "repository": "https://github.com/StonyBrookNLP/musique.git",
+    "repository_commit": "922ac98f19a201998dbdae6d7f2887a5258dbdeb",
+    "repository_license": "CC BY 4.0",
+    "license_sha256": "cce5d01fa4a83b794271bd2c28cffdf99afd43c803e6ddefddae39b591ea7448",
+    "archive_path": "/home/hesong/AI-Agent-Projects/data/musique_official/musique_v1.0.zip",
+    "archive_bytes": 272049578,
+    "archive_sha256": "98f839bf2fd5319f5c688aed77901a6d5c30b3b9f9f691ab9a8ecafb045ee0cd",
+    "allowed_zip_member": "data/musique_full_v1.0_train.jsonl",
+    "allowed_train_path": "/home/hesong/AI-Agent-Projects/data/musique_official/train_only/musique_full_v1.0_train.jsonl",
+    "allowed_train_bytes": 476696984,
+    "allowed_train_rows": 39876,
+    "allowed_train_pairs": 19938,
+    "allowed_train_sha256": "b1cd998f7e0e2838d6fda024e4ad1eb0e7fc3edefdadb0bd9b5b10b0907f2034",
+    "provenance_record": "SOURCE_PROVENANCE.md"
+  },
+  "access_boundary": {
+    "builder_allowlist": [
+      "/home/hesong/AI-Agent-Projects/data/musique_official/train_only/musique_full_v1.0_train.jsonl"
+    ],
+    "training_allowlist_after_launch_receipt": [
+      "prepared_data_v1/train.jsonl"
+    ],
+    "development_evaluation_allowlist_after_training": [
+      "prepared_data_v1/dev.jsonl"
+    ],
+    "public_audit_allowlist": [
+      "prepared_data_v1/manifest.json",
+      "prepared_data_v1/audit.json",
+      "prepared_data_v1/rejection_ledger.json",
+      "prepared_data_v1/SHADOW_SEALED.json",
+      "prepared_data_v1/*.sha256",
+      "prepared_data_v1/SHA256SUMS"
+    ],
+    "forbidden_until_three_seed_dev_go": [
+      "prepared_data_v1/shadow.sealed.jsonl"
+    ],
+    "forbidden_for_entire_pilot": [
+      "every official MuSiQue dev member or extracted dev file",
+      "every official MuSiQue test member or extracted test file",
+      "labels, predictions, prompts, or scores derived from official dev/test",
+      "network-fetched evaluation data",
+      "model-generated gold answers or support labels"
+    ],
+    "unit_test_policy": "Tests use synthetic fixtures plus allowlisted manifests/audits; no test may open the sealed-shadow body or official dev/test.",
+    "fail_closed": true
+  },
+  "orbit_definition": {
+    "states": [
+      "C",
+      "D",
+      "M"
+    ],
+    "paragraph_slots_per_state": 20,
+    "C": {
+      "meaning": "COMPLETE",
+      "source": "official answerable row",
+      "target": "official final answer plus the official supporting paragraph indices",
+      "eligibility": "all decomposition support indices are valid C support flags and equal the support-flag set"
+    },
+    "M": {
+      "meaning": "MISSING",
+      "source": "official paired unanswerable row with the same id, question, answer, and decomposition as C",
+      "eligibility": "omits at least one raw-text SHA256 from C support and at least one decomposition subanswer token sequence",
+      "target": "U | evidence=[] | answer=INSUFFICIENT_EVIDENCE"
+    },
+    "D": {
+      "meaning": "DISTRACTOR-REPLACED COMPLETE",
+      "source": "deterministic copy of C",
+      "intervention": "replace exactly two C non-support slots with leak-filtered C-nonsupport donors from different orbits in the same split",
+      "preserved": [
+        "question",
+        "all C support paragraphs byte-for-byte and in their original slots",
+        "answer",
+        "support-index set",
+        "canonical assistant target"
+      ],
+      "donor_constraints": [
+        "same split",
+        "different source orbit",
+        "never a C support paragraph",
+        "no target answer, alias, or decomposition-subanswer token sequence",
+        "token-length ratio <= 1.25",
+        "length, duplication, coherence, and question-overlap matching"
+      ]
+    },
+    "visible_state_metadata": false,
+    "model_generated_labels": false
+  },
+  "split_contract": {
+    "selection_seed": "support-orbit-musique-v1",
+    "strict_eligible_orbits": 18834,
+    "selected_orbits": 2720,
+    "whole_component_assignment": true,
+    "component_edges": [
+      "shared decomposition source ID",
+      "shared raw C support paragraph-text SHA256",
+      "shared normalized answer, either alias list item, or decomposition subanswer"
+    ],
+    "counts": {
+      "train_orbits": 1920,
+      "dev_orbits": 400,
+      "shadow_orbits": 400,
+      "train_records": 5760,
+      "dev_records": 1200,
+      "shadow_records": 1200
+    },
+    "required_cross_split_leakage_key_intersections": 0,
+    "assignment": "deterministic exact-size subset-sum over whole components, independently salted by split"
+  },
+  "data_release_gates": {
+    "all_required": true,
+    "construction": [
+      "2,720/2,720 orbits replace exactly two non-support slots in D",
+      "2,720/2,720 preserve every C support paragraph byte-for-byte in D",
+      "2,720/2,720 preserve the exact C target in D",
+      "2,720/2,720 use same-split donors",
+      "zero donor length-ratio violations",
+      "zero train/dev/shadow leakage-key intersections"
+    ],
+    "learned_surface_probe": {
+      "features": "18 state-blind document surface/structure features; no question, answer, support flag, provenance, or state label",
+      "classifier": "orbit-grouped deterministic 5-fold OOF StandardScaler plus logistic regression",
+      "pairs": [
+        "C-D",
+        "D-M",
+        "C-M"
+      ],
+      "gate": "max(raw ROC AUC, 1-raw ROC AUC) <= 0.60 for every pair",
+      "shadow_excluded": true
+    },
+    "semantic_diagnostic_probe": {
+      "features": "surface family plus question-document lexical overlap; no answer-derived feature",
+      "gate": "C-D separability AUC <= 0.60",
+      "D_M_and_C_M": "diagnostic only because missing evidence is a real semantic distinction",
+      "shadow_excluded": true
+    },
+    "tokenizer": {
+      "path": "/home/hesong/AI-Agent-Projects/models/Qwen3-4B-Instruct-2507",
+      "max_sequence_tokens": 6144,
+      "train_and_dev_only": true,
+      "required": [
+        "zero over-limit records",
+        "zero truncation",
+        "prepared rendering byte-identical to canonical rendering",
+        "native chat template with enable_thinking=false",
+        "completion-only labels including EOS"
+      ]
+    }
+  },
+  "prepared_data_lock": {
+    "path": "prepared_data_v1/manifest.json",
+    "expected_manifest_sha256": "9d5e13b893e7c456872111da223487c526ec25cafb9c88eb549cbb1e2cb44ca3",
+    "expected_schema_version": "support-orbit-musique/v1",
+    "release_status": "READY",
+    "shadow_body_must_not_be_reopened_for_freeze": true,
+    "artifact_sha256": {
+      "train.jsonl": "e450639b573521be2675c053f8f96f1ce396402bdb350a192d01b98e3e8d23fc",
+      "dev.jsonl": "0bfb83a98d057cf612c3236ed419a370bbf0229a4778c521520c516688b5ec69",
+      "shadow.sealed.jsonl_writer_digest": "eaae9d5ec128b3f1deececddb72cc5589a5dfbdbb7b312bc08e3c79ebbdc4eb5",
+      "audit.json": "0c00b2b571a6b52e1d2dad125a15358e7a9bbd587be98a962c49ca8a99488a8d",
+      "SHADOW_SEALED.json": "e9de44b37c8dbd8e0dd7f9846bd8c588aeba477a5aaf89d1e1b57f4d9b740388"
+    },
+    "independent_release_validation": {
+      "passed": true,
+      "shadow_body_opened": false,
+      "construction_invariants": "2720/2720 for exact two-slot replacement, support preservation, C/D target identity, and same-split donors; donor length-ratio violations=0",
+      "surface_separability_auc": {
+        "C-D": 0.5375308412604043,
+        "D-M": 0.5596620466706301,
+        "C-M": 0.5609135329964328
+      },
+      "semantic_question_overlap_separability_auc": {
+        "C-D_gate": 0.5405356346611176,
+        "D-M_diagnostic": 0.6332582119500595,
+        "C-M_diagnostic": 0.6346356643876339
+      },
+      "tokenizer_audit": {
+        "records": 6960,
+        "max_tokens": 4974,
+        "ceiling": 6144,
+        "over_limit_records": 0,
+        "prepared_vs_canonical_mismatches": 0,
+        "zero_truncation_pass": true
+      }
+    }
+  },
+  "output_contract": {
+    "supported": "S | evidence=[P00,P01] | answer=<answer>",
+    "unsupported": "U | evidence=[] | answer=INSUFFICIENT_EVIDENCE",
+    "parser": "full-string strict grammar; P00-P19 only; ascending unique evidence IDs; no repair or substring recovery",
+    "C_and_D_action": "S",
+    "M_action": "U"
+  },
+  "arms": {
+    "CONTROL": {
+      "presentations_per_orbit": [
+        "C",
+        "D",
+        "M"
+      ],
+      "objective": "L_sft",
+      "kl_weight": 0.0,
+      "flip_weight": 0.0
+    },
+    "HopPAIR": {
+      "presentations_per_orbit": [
+        "C",
+        "D",
+        "M"
+      ],
+      "objective": "L_sft + 0.1*KL(stopgrad(p_C)||p_D) + 0.2*0.5*(softplus(2-(z_C-z_M)) + softplus(2-(z_D-z_M)))",
+      "kl_weight": 0.1,
+      "flip_weight": 0.2,
+      "flip_margin": 2.0,
+      "z_definition": "first-assistant-position logit(S)-logit(U)",
+      "kl_scope": "token mean over exactly shared C/D completion ordinals and the full vocabulary; C is stop-gradient teacher"
+    },
+    "sft_definition": "mean completion-token CE within each state followed by an unweighted mean over C, D, and M",
+    "single_forward": "Every microstep concatenates one atomic orbit as three C/D/M rows in one model forward for both arms."
+  },
+  "matched_training_contract": {
+    "base_model_path": "/home/hesong/AI-Agent-Projects/models/Qwen3-4B-Instruct-2507",
+    "model_and_tokenizer_hashes": "required in the separate launch receipt",
+    "development_seeds_before_shadow": [
+      17,
+      29,
+      43
+    ],
+    "first_launch_seed": 17,
+    "epochs": 1,
+    "optimizer_steps_per_arm": 240,
+    "group_microbatch_orbits": 1,
+    "gradient_accumulation_orbits": 8,
+    "effective_batch_orbits": 8,
+    "states_per_orbit": 3,
+    "train_orbits": 1920,
+    "schedule_algorithm": "sort orbit IDs by SHA256(str(seed) + newline + orbit_id)",
+    "drop_last": false,
+    "resume": false,
+    "max_length": 6144,
+    "precision": "bfloat16",
+    "attention_implementation": "sdpa",
+    "gradient_checkpointing": true,
+    "optimizer": "adamw_torch_fused",
+    "learning_rate": 0.0002,
+    "warmup_ratio": 0.03,
+    "warmup_steps": 8,
+    "lr_scheduler_type": "cosine",
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "dataloader_num_workers": 0,
+    "lora": {
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "bias": "none",
+      "task_type": "CAUSAL_LM",
+      "coverage": "all transformer linear projections",
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "gate_proj",
+        "up_proj",
+        "down_proj"
+      ]
+    },
+    "exact_arm_equalities": [
+      "base and LoRA initialization within each seed",
+      "C/D/M input rows and targets",
+      "orbit schedule and microbatch boundaries",
+      "one forward per microstep",
+      "optimizer, scheduler, LoRA, precision, and finite-guard settings",
+      "1,920 orbit presentations and 5,760 state rows",
+      "240 completed optimizer steps",
+      "final-step-only checkpoint policy"
+    ],
+    "required_zero_counts": [
+      "truncated rows",
+      "dropped or duplicate orbits",
+      "non-finite losses",
+      "non-finite gradients",
+      "non-finite trainable parameters",
+      "non-finite optimizer states",
+      "skipped optimizer steps",
+      "dev reads during training",
+      "shadow reads",
+      "official dev/test reads"
+    ],
+    "initialization_audit": {
+      "pre_gpu": "bind the base-model hash, seed, LoRA specification, initialization code hash, schedule hash, and no-resume policy",
+      "pre_dev_generation": "after both training runs but before any trained-arm dev generation, require exact equality of the recorded initial_trainable_parameters_sha256 values",
+      "failure_action": "STOP_NO_DEV_GENERATION"
+    }
+  },
+  "development_evaluation": {
+    "split": "prepared_data_v1/dev.jsonl",
+    "orbits": 400,
+    "states": [
+      "C",
+      "D",
+      "M"
+    ],
+    "checkpoint": "final optimizer step only",
+    "decoding": {
+      "do_sample": false,
+      "num_return_sequences": 1,
+      "max_new_tokens": 128,
+      "budget_exhausted_rows": "record exactly; no output-dependent extension or 256-token replacement run is allowed under v1"
+    },
+    "statistics": {
+      "pairing_unit": "orbit",
+      "treatment_delta": "HopPAIR minus CONTROL",
+      "paired_bootstrap_samples": 10000,
+      "paired_bootstrap_seed": 20260814,
+      "confidence_interval": "95% paired percentile interval"
+    },
+    "metrics": {
+      "answer_f1": "official MuSiQue normalization with maximum over answer plus aliases",
+      "support_f1": "official supporting-paragraph set F1",
+      "cd_min_f1": "per-orbit min(C answer F1, D answer F1)",
+      "orbit_answer_suff_f1": "cd_min_f1 only when C and D answer and M refuses; otherwise zero",
+      "orbit_support_suff_f1": "min(C support F1, D support F1) under the same C-answer/D-answer/M-refuse event; otherwise zero",
+      "false_refusal_rate": "mean refusal indicator over C and D",
+      "m_refusal_rate": "refusal rate on M",
+      "parse_rate": "strict full-string parse rate over C/D/M"
+    },
+    "gates_from_support_orbit_metrics_v1": [
+      {
+        "id": "CD_MIN_F1_GAIN",
+        "rule": "delta >= +0.04 and paired-bootstrap CI lower bound > 0"
+      },
+      {
+        "id": "ORBIT_ANSWER_SUFF_GAIN",
+        "rule": "delta >= +0.04 and paired-bootstrap CI lower bound > 0"
+      },
+      {
+        "id": "D_ANSWER_F1_GAIN",
+        "rule": "delta >= +0.04"
+      },
+      {
+        "id": "C_ANSWER_F1_NONINFERIORITY",
+        "rule": "delta >= -0.02"
+      },
+      {
+        "id": "FALSE_REFUSAL_NONINFERIORITY",
+        "rule": "delta <= +0.02"
+      },
+      {
+        "id": "M_REFUSAL",
+        "rule": "delta >= 0 and HopPAIR absolute rate >= 0.80"
+      },
+      {
+        "id": "ORBIT_SUPPORT_SUFF_NONINFERIORITY",
+        "rule": "delta >= -0.02"
+      },
+      {
+        "id": "PARSE_RATE",
+        "rule": "HopPAIR absolute rate >= 0.99"
+      },
+      {
+        "id": "RUN_INTEGRITY",
+        "rule": "all cryptographic bindings and runtime checks true"
+      }
+    ],
+    "all_gates_required_per_seed": true,
+    "seed_escalation": "Run seed 17 first under the v1 canonical receipt/output roots. On STOP, end the route. On GO, run predeclared seeds 29 and 43 under separate versioned receipts, code locks, and output roots; they may not overwrite seed 17. Shadow remains sealed unless all three seed comparisons are GO.",
+    "failure_action": "STOP_NO_SHADOW_NO_OFFICIAL_NO_DPO"
+  },
+  "shadow_and_official_boundary": {
+    "shadow": {
+      "artifact": "prepared_data_v1/shadow.sealed.jsonl",
+      "initial_status": "SEALED",
+      "open_condition": "3/3 frozen-seed dev comparisons return GO with complete integrity",
+      "selection_use": "forbidden",
+      "evaluation": "one shot under a separately frozen shadow receipt; no threshold, prompt, checkpoint, seed, or decoding changes"
+    },
+    "official_dev_and_test": {
+      "status": "UNEXTRACTED_UNREAD_OUTSIDE_PILOT",
+      "open_condition": "not authorized by this protocol; requires a later protocol after shadow success",
+      "may_not_select": [
+        "data",
+        "method",
+        "weights",
+        "hyperparameters",
+        "checkpoint",
+        "prompt",
+        "decoding",
+        "metric thresholds"
+      ]
+    }
+  },
+  "literature_and_novelty_boundary": {
+    "RAFT": {
+      "reference": "RAFT: Adapting Language Model to Domain Specific RAG, COLM 2024",
+      "url": "https://openreview.net/forum?id=rzQGHXNReU",
+      "establishes": "open-book supervised adaptation with oracle evidence, distractors, and evidence-citing answers",
+      "does_not_establish_here": "HopPAIR's paired C/D/M construction, one-way completion KL, or sufficiency action margin"
+    },
+    "Trust-Align": {
+      "reference": "Measuring and Enhancing Trustworthiness of LLMs in RAG through Grounded Attributions and Learning to Refuse, ICLR 2025",
+      "url": "https://proceedings.iclr.cc/paper_files/paper/2025/hash/4c88827decab6c046b881a2c3a99c76f-Abstract-Conference.html",
+      "establishes": "the importance of jointly evaluating answer quality, citations, and refusal, and a preference-alignment route",
+      "does_not_establish_here": "official Trust-Score performance or a preference-trained result; this pilot uses neither Trust-Data nor DPO"
+    },
+    "CORD": {
+      "reference": "CORD: Balancing COnsistency and Rank Distillation for Robust Retrieval-Augmented Generation, NAACL 2025 Short Papers",
+      "url": "https://aclanthology.org/2025.naacl-short.66/",
+      "establishes": "consistency regularization across position-perturbed RAG contexts and the risk of blind consistency when rank priors matter",
+      "does_not_establish_here": "novelty of KL consistency itself; HopPAIR instead studies support-preserving non-support replacement, one-way clean anchoring, and an answer-versus-refuse margin"
+    },
+    "GRACE": {
+      "reference": "GRACE: Reinforcement Learning for Grounded Response and Abstention under Contextual Evidence, arXiv:2601.04525 (preprint)",
+      "url": "https://arxiv.org/abs/2601.04525",
+      "establishes": "a contemporary RL route combining evidence grounding and abstention with gated rewards",
+      "does_not_establish_here": "peer-reviewed authority for HopPAIR, an RL claim, a reward-model claim, or state-of-the-art performance"
+    },
+    "allowed_novelty_statement": "A controlled pilot of support-preserving paired consistency and evidence-sufficiency margin training on official multi-hop answerable/unanswerable pairs.",
+    "forbidden_novelty_statement": "first consistency-trained RAG model, first grounded-refusal method, or first distractor-aware RAG post-training method"
+  },
+  "claim_boundary": {
+    "C": "official MuSiQue answerable context and annotations",
+    "M": "official paired unanswerable context that passes explicit missing-support and missing-subanswer filters; not a proof that no parametric-memory answer is possible",
+    "D": "synthetic support-preserving replacement of exactly two non-support paragraphs; not a real retriever output, verified adversarial hard negative, or ranking benchmark",
+    "pilot_result": "internal held-out train-derived post-training evidence only",
+    "allowed_after_three_seed_dev_and_shadow_go": "HopPAIR improved the frozen orbit-level answer/evidence-sufficiency metrics under this MuSiQue-derived intervention while satisfying clean-C, refusal, support, parse, and integrity gates.",
+    "forbidden_without_later_protocol": [
+      "official MuSiQue dev/test improvement",
+      "state-of-the-art RAG performance",
+      "retriever improvement",
+      "production generalization",
+      "semantic entailment improvement beyond the frozen answer/support metrics",
+      "RL or preference-optimization result"
+    ]
+  },
+  "pre_gpu_gates": {
+    "all_required": true,
+    "immutable_failure_action": "STOP_BEFORE_GPU",
+    "separate_receipt_schema": "support-orbit-musique.launch-receipt.v1",
+    "required_bindings": [
+      "this protocol SHA256",
+      "prepared manifest SHA256 and READY data-gate evidence",
+      "train/dev artifact SHA256 without opening shadow",
+      "base-model and tokenizer hashes, chat-template hash, EOS and pad IDs",
+      "training/evaluation code and test hashes",
+      "same seed-specific orbit schedule hash for both arms",
+      "deterministic initialization specification: seed, base hash, LoRA configuration, initialization code hash, and no-resume policy",
+      "environment lock and GPU assignment",
+      "all scoped tests PASS",
+      "forbidden-access assertions for shadow and official dev/test"
+    ]
+  }
+}

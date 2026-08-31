@@ -1,0 +1,267 @@
+{
+  "schema_version": "support-orbit-musique.protocol/v2",
+  "protocol_id": "support_orbit_musique_pilot_v2",
+  "protocol_status": "FROZEN_PRE_GPU",
+  "launch_status": "STOP_BEFORE_GPU",
+  "frozen_on": "2026-08-14",
+  "supersession": {
+    "withdrawn_protocol": "protocols/support_orbit_pilot_v1.json",
+    "withdrawn_protocol_sha256": "8c8c9358274890eb8b1539a9e61e1c79b245214d6393004aeaa916cf053b1c8b",
+    "withdrawn_manifest_sha256": "9d5e13b893e7c456872111da223487c526ec25cafb9c88eb549cbb1e2cb44ca3",
+    "status": "WITHDRAWN_INVALID_AUDIT_RATIO_AND_DONOR_ALIAS_CONTAMINATION",
+    "policy": "V1 files and its sealed shadow remain immutable audit evidence and are never valid training inputs."
+  },
+  "status_semantics": {
+    "method_change_from_v1": false,
+    "data_correction_only": true,
+    "launch_rule": "This frozen protocol does not authorize a GPU; a separate fail-closed v2 launch receipt and independent red-team approval are required.",
+    "default_on_missing_or_mismatch": "STOP_BEFORE_GPU",
+    "amendment_policy": "Never edit v2 in place after its sidecar is written."
+  },
+  "source_lock": {
+    "dataset": "MuSiQue full v1.0",
+    "repository": "https://github.com/StonyBrookNLP/musique.git",
+    "repository_commit": "922ac98f19a201998dbdae6d7f2887a5258dbdeb",
+    "repository_license": "CC BY 4.0",
+    "license_sha256": "cce5d01fa4a83b794271bd2c28cffdf99afd43c803e6ddefddae39b591ea7448",
+    "archive_sha256": "98f839bf2fd5319f5c688aed77901a6d5c30b3b9f9f691ab9a8ecafb045ee0cd",
+    "allowed_train_path": "/home/hesong/AI-Agent-Projects/data/musique_official/train_only/musique_full_v1.0_train.jsonl",
+    "allowed_train_rows": 39876,
+    "allowed_train_pairs": 19938,
+    "allowed_train_sha256": "b1cd998f7e0e2838d6fda024e4ad1eb0e7fc3edefdadb0bd9b5b10b0907f2034"
+  },
+  "access_boundary": {
+    "builder_allowlist": [
+      "/home/hesong/AI-Agent-Projects/data/musique_official/train_only/musique_full_v1.0_train.jsonl"
+    ],
+    "training_allowlist_after_v2_launch_receipt": [
+      "prepared_data_v2/train.jsonl"
+    ],
+    "development_evaluation_allowlist_after_training": [
+      "prepared_data_v2/dev.jsonl"
+    ],
+    "forbidden_until_three_seed_dev_go": [
+      "prepared_data_v2/shadow.sealed.jsonl"
+    ],
+    "forbidden_for_entire_pilot": [
+      "prepared_data_v1/** as a training or evaluation source",
+      "every official MuSiQue dev member or extracted dev file",
+      "every official MuSiQue test member or extracted test file",
+      "network-fetched evaluation data"
+    ],
+    "fail_closed": true
+  },
+  "prepared_data_lock": {
+    "path": "prepared_data_v2/manifest.json",
+    "expected_manifest_sha256": "84e97c0eb189d664149822c1244436f0b97e69e3cbca7e16be8186df52a7dfc1",
+    "expected_schema_version": "support-orbit-musique/v2",
+    "builder_version": "2.0.0",
+    "release_status": "READY",
+    "counts": {
+      "train_orbits": 1920,
+      "dev_orbits": 400,
+      "shadow_orbits": 400,
+      "train_records": 5760,
+      "dev_records": 1200,
+      "shadow_records": 1200
+    },
+    "artifact_sha256": {
+      "train.jsonl": "641bae95c4eb410229fb8c87a52b24e58628c376c636632d242115ca7e4d5c12",
+      "train.jsonl.sha256": "fe158e0fa881d10673c311cdc68acef7f3705a208077ad1cc26f73502c95d81d",
+      "dev.jsonl": "84acfa99def02660aa74d836f07ff4219c0c838c29e19d7d335a126c7840b909",
+      "dev.jsonl.sha256": "0ec2f1ed612cfaa9566eebe6cc76adad099840a5d8b30304ef071bf6cbdc9d0e",
+      "shadow.sealed.jsonl_writer_digest": "1eed3236bb17e79518ae5c3787f3171a37eaea1bfec8f6f46766a59ce2e1d293",
+      "shadow.sealed.jsonl.sha256": "81570ec99e9f01f55c61050e46eb3a155d8579574fcbc72733457de0feefecb7",
+      "audit.json": "462acaada470b7b49b5fbe74c990810714b6a8b9bcaa1b0cd6b97b801a957a6e",
+      "SHADOW_SEALED.json": "5e6288ef3d7e35ebd9c6c5d3812895f0a812106913b5fb357ae4e96052af5bd5"
+    },
+    "shadow_body_opened_during_protocol_validation": false
+  },
+  "orbit_and_split_contract": {
+    "states": [
+      "C",
+      "D",
+      "M"
+    ],
+    "paragraph_slots_per_state": 20,
+    "C": "official answerable row and complete-row aliases",
+    "M": "official paired unanswerable row, missing at least one C support-text hash and one subanswer token sequence, with missing-row aliases",
+    "D": "copy C and replace exactly two non-support slots with same-split leak-filtered C-nonsupport donors while preserving every C support paragraph, answer, aliases, support indices, and target",
+    "fixed_refusal": "U | evidence=[] | answer=INSUFFICIENT_EVIDENCE",
+    "supported_grammar": "S | evidence=[P00,P01] | answer=<answer>",
+    "selection_seed": "support-orbit-musique-v1",
+    "whole_component_assignment": true,
+    "cross_split_leakage_key_intersections": 0,
+    "v2_corrections": [
+      "global donor exclusion against every selected C support-text SHA256",
+      "donor token-length ratio computed with the same count representation used by its <=1.25 audit",
+      "C/D serialize exact complete-row aliases; M serializes exact missing-row aliases"
+    ]
+  },
+  "independent_release_validation": {
+    "passed": true,
+    "shadow_body_opened": false,
+    "construction_invariants": {
+      "orbits_with_exactly_two_nonsupport_replacements": 2720,
+      "orbits_with_byte_identical_support_in_C_and_D": 2720,
+      "orbits_with_exact_C_and_D_target": 2720,
+      "orbits_with_same_split_donors": 2720,
+      "orbits_with_no_C_support_text_as_donor": 2720,
+      "orbits_with_state_specific_official_aliases": 2720,
+      "donor_length_ratio_max": 1.25,
+      "donor_length_ratio_violations": 0
+    },
+    "surface_separability_auc": {
+      "C-D": 0.539688057372176,
+      "D-M": 0.5592969678953628,
+      "C-M": 0.5609135329964328,
+      "ceiling": 0.6
+    },
+    "semantic_question_overlap_separability_auc": {
+      "C-D_gate": 0.5431179399524376,
+      "D-M_diagnostic": 0.6330040502378121,
+      "C-M_diagnostic": 0.6346356643876339,
+      "C-D_ceiling": 0.6
+    },
+    "tokenizer_audit": {
+      "records": 6960,
+      "max_tokens": 4974,
+      "ceiling": 6144,
+      "over_limit_records": 0,
+      "prepared_vs_canonical_mismatches": 0,
+      "zero_truncation_pass": true
+    }
+  },
+  "method_lock_unchanged_from_v1": {
+    "inherited_from_sha256": "8c8c9358274890eb8b1539a9e61e1c79b245214d6393004aeaa916cf053b1c8b",
+    "arms": {
+      "CONTROL": "L_sft",
+      "HopPAIR": "L_sft + 0.1*KL(stopgrad(p_C)||p_D) + 0.2*0.5*(softplus(2-(z_C-z_M)) + softplus(2-(z_D-z_M)))"
+    },
+    "state_exposure_both_arms": [
+      "C",
+      "D",
+      "M"
+    ],
+    "sft": "mean completion-token CE within each state, then unweighted mean across C/D/M",
+    "kl": "token mean over shared C/D completion ordinals; C is stop-gradient teacher",
+    "z": "first-assistant-position logit(S)-logit(U)",
+    "single_forward": "one atomic C/D/M orbit in one forward for both arms",
+    "prohibited": [
+      "DPO",
+      "ORPO",
+      "KTO",
+      "PPO",
+      "GRPO",
+      "DAPO",
+      "reward-model training",
+      "checkpoint selection"
+    ]
+  },
+  "matched_training_contract_unchanged_from_v1": {
+    "base_model_path": "/home/hesong/AI-Agent-Projects/models/Qwen3-4B-Instruct-2507",
+    "first_launch_seed": 17,
+    "development_seeds_before_shadow": [
+      17,
+      29,
+      43
+    ],
+    "epochs": 1,
+    "optimizer_steps_per_arm": 240,
+    "group_microbatch_orbits": 1,
+    "gradient_accumulation_orbits": 8,
+    "effective_batch_orbits": 8,
+    "states_per_orbit": 3,
+    "max_length": 6144,
+    "precision": "bfloat16",
+    "attention_implementation": "sdpa",
+    "gradient_checkpointing": true,
+    "optimizer": "adamw_torch_fused",
+    "learning_rate": 0.0002,
+    "warmup_ratio": 0.03,
+    "warmup_steps": 8,
+    "lr_scheduler_type": "cosine",
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "lora": {
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "bias": "none",
+      "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj",
+        "gate_proj",
+        "up_proj",
+        "down_proj"
+      ]
+    },
+    "initialization_gate": "bind deterministic specification pre-GPU and require exact initial_trainable_parameters_sha256 equality before any trained-arm dev generation",
+    "checkpoint": "final optimizer step only"
+  },
+  "development_evaluation_and_gates_unchanged_from_v1": {
+    "split": "prepared_data_v2/dev.jsonl",
+    "orbits": 400,
+    "states": [
+      "C",
+      "D",
+      "M"
+    ],
+    "max_new_tokens": 128,
+    "do_sample": false,
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": 20260814,
+    "gates": {
+      "CD_MIN_F1_GAIN": "delta>=0.04 and paired bootstrap CI low>0",
+      "ORBIT_ANSWER_SUFF_GAIN": "delta>=0.04 and paired bootstrap CI low>0",
+      "D_ANSWER_F1_GAIN": "delta>=0.04",
+      "C_ANSWER_F1_NONINFERIORITY": "delta>=-0.02",
+      "FALSE_REFUSAL_NONINFERIORITY": "delta<=0.02",
+      "M_REFUSAL": "delta>=0 and HopPAIR absolute rate>=0.80",
+      "ORBIT_SUPPORT_SUFF_NONINFERIORITY": "delta>=-0.02",
+      "PARSE_RATE": "HopPAIR absolute rate>=0.99",
+      "RUN_INTEGRITY": "all bindings and runtime checks true"
+    },
+    "all_gates_required_per_seed": true,
+    "seed_escalation": "seed 17 first; only GO permits separately locked seeds 29 and 43; shadow requires 3/3 dev GO",
+    "failure_action": "STOP_NO_SHADOW_NO_OFFICIAL_NO_DPO"
+  },
+  "shadow_and_official_boundary": {
+    "shadow_status": "SEALED",
+    "shadow_open_condition": "3/3 frozen-seed dev comparisons GO under a separate one-shot receipt",
+    "official_dev_test_status": "UNEXTRACTED_UNREAD_OUTSIDE_PILOT",
+    "official_open_condition": "not authorized by v2"
+  },
+  "literature_and_claim_boundary": {
+    "inheritance": "Unchanged from withdrawn v1 protocol SHA256 8c8c9358274890eb8b1539a9e61e1c79b245214d6393004aeaa916cf053b1c8b",
+    "references": [
+      "RAFT, COLM 2024",
+      "Trust-Align, ICLR 2025",
+      "CORD, NAACL 2025 Short Papers",
+      "GRACE, arXiv:2601.04525 preprint"
+    ],
+    "allowed": "controlled post-training pilot of support-preserving paired consistency and evidence-sufficiency margin learning",
+    "forbidden": [
+      "official MuSiQue dev/test improvement",
+      "state-of-the-art performance",
+      "retriever improvement",
+      "RL or preference-optimization result",
+      "production generalization"
+    ]
+  },
+  "pre_gpu_gates": {
+    "all_required": true,
+    "failure_action": "STOP_BEFORE_GPU",
+    "receipt_must_bind": [
+      "v2 protocol path/schema/SHA256",
+      "v2 manifest and train/dev hashes",
+      "base model and tokenizer hashes",
+      "v2-aware code and scoped test hashes",
+      "seed-17 schedule hash shared by both arms",
+      "environment and GPU assignment",
+      "forbidden access to v1 data, v2 shadow, and official dev/test"
+    ]
+  }
+}

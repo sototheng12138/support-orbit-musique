@@ -1,0 +1,559 @@
+{
+  "access_evidence": {
+    "cuda_initialized_by_freezer": false,
+    "dev_body_opened_pre_training": false,
+    "gpu_model_loaded": false,
+    "network_evaluation_data_used": false,
+    "official_archive_opened": false,
+    "official_dev_opened": false,
+    "official_test_opened": false,
+    "shadow_body_opened": false,
+    "train_body_opened_pre_receipt": false,
+    "withdrawn_v1_data_body_opened": false
+  },
+  "canonical_path": "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/protocols/pilot_v2_launch_receipt.json",
+  "created_at": "2026-08-14T15:12:39.680403+00:00",
+  "data_release_evidence": {
+    "dev_sidecar": {
+      "path": "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/prepared_data_v2/dev.jsonl.sha256",
+      "sha256": "0ec2f1ed612cfaa9566eebe6cc76adad099840a5d8b30304ef071bf6cbdc9d0e",
+      "target_sha256": "84acfa99def02660aa74d836f07ff4219c0c838c29e19d7d335a126c7840b909"
+    },
+    "train_sidecar": {
+      "path": "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/prepared_data_v2/train.jsonl.sha256",
+      "sha256": "fe158e0fa881d10673c311cdc68acef7f3705a208077ad1cc26f73502c95d81d",
+      "target_sha256": "641bae95c4eb410229fb8c87a52b24e58628c376c636632d242115ca7e4d5c12"
+    },
+    "validation": {
+      "checks": {
+        "artifact_exists:dev.jsonl": true,
+        "artifact_exists:train.jsonl": true,
+        "artifact_hash:dev.jsonl": true,
+        "artifact_hash:train.jsonl": true,
+        "audit_hash": true,
+        "audit_release_matches": true,
+        "construction:C_D_alias_policy": true,
+        "construction:M_alias_policy": true,
+        "construction:no_C_support_text_as_donor": true,
+        "construction:orbits_with_byte_identical_support_in_C_and_D": true,
+        "construction:orbits_with_exact_C_and_D_target": true,
+        "construction:orbits_with_exactly_two_nonsupport_replacements": true,
+        "construction:orbits_with_same_split_donors": true,
+        "construction:state_specific_official_aliases": true,
+        "construction_all": true,
+        "count:dev_orbits": true,
+        "count:dev_records": true,
+        "count:shadow_orbits": true,
+        "count:shadow_records": true,
+        "count:train_orbits": true,
+        "count:train_records": true,
+        "cross_split_zero": true,
+        "data_schema": true,
+        "donor_ratio_ceiling": true,
+        "donor_ratio_max": true,
+        "donor_ratio_no_violations": true,
+        "protocol_artifact_hash:SHADOW_SEALED.json": true,
+        "protocol_artifact_hash:audit.json": true,
+        "protocol_artifact_hash:dev.jsonl": true,
+        "protocol_artifact_hash:shadow_writer_digest": true,
+        "protocol_artifact_hash:train.jsonl": true,
+        "protocol_data_status_ready": true,
+        "protocol_manifest_hash": true,
+        "protocol_schema": true,
+        "protocol_status_frozen": true,
+        "release:construction_invariants_pass": true,
+        "release:semantic_C_D_probe_pass": true,
+        "release:surface_probe_pass": true,
+        "release:zero_truncation_pass": true,
+        "release_status": true,
+        "selected_orbits": true,
+        "semantic_auc:C-D": true,
+        "shadow_hash_transitive": true,
+        "shadow_marker_hash": true,
+        "shadow_marker_orbits": true,
+        "shadow_marker_read_forbidden": true,
+        "shadow_marker_records": true,
+        "shadow_marker_sealed": true,
+        "source_exact": true,
+        "surface_auc:C-D": true,
+        "surface_auc:C-M": true,
+        "surface_auc:D-M": true,
+        "surface_pair_set": true,
+        "token_contract_exact": true,
+        "token_max": true,
+        "token_over_limit_zero": true,
+        "token_records": true,
+        "token_shadow_excluded": true,
+        "token_zero_truncation": true,
+        "whole_components": true
+      },
+      "manifest_sha256": "84e97c0eb189d664149822c1244436f0b97e69e3cbca7e16be8186df52a7dfc1",
+      "passed": true,
+      "shadow_body_opened": false
+    }
+  },
+  "environment_lock": {
+    "packages": {
+      "accelerate": "1.14.0",
+      "numpy": "2.4.6",
+      "peft": "0.20.0",
+      "safetensors": "0.7.0",
+      "tokenizers": "0.22.2",
+      "torch": "2.9.1",
+      "transformers": "4.57.3"
+    },
+    "python": {
+      "executable": "/home/hesong/AI-Agent-Projects/.venv-schematune/bin/python",
+      "version": "3.13.9"
+    }
+  },
+  "evidence_sha256": "b45e62f01c19dee1f1239fe19486d0d1d8298b259ecc4a73ea60bb3a61b80830",
+  "exact_bindings": {
+    "base_model": {
+      "path": "/home/hesong/AI-Agent-Projects/models/Qwen3-4B-Instruct-2507",
+      "sha256": "789936fb833362da427b5452cadb1cd7a3fb018f42b8ccaa8f705fb929dfb37d"
+    },
+    "dev": {
+      "orbits": 400,
+      "path": "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/prepared_data_v2/dev.jsonl",
+      "records": 1200,
+      "sha256": "84acfa99def02660aa74d836f07ff4219c0c838c29e19d7d335a126c7840b909"
+    },
+    "prepared_manifest": {
+      "path": "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/prepared_data_v2/manifest.json",
+      "sha256": "84e97c0eb189d664149822c1244436f0b97e69e3cbca7e16be8186df52a7dfc1"
+    },
+    "protocol": {
+      "path": "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/protocols/support_orbit_pilot_v2.json",
+      "sha256": "1a888808d4a09983d0e98d31f1668b2f5faf844dde3b44f4d5e863e555e0c33f"
+    },
+    "schedule_sha256": "027c7d3eba760be6956060a487836088911ea5d7746e4fb5586f811c2c7c6ac4",
+    "source_lock_sha256": "4009ed46316e3f5994003500f2dfa2bf6f99fbf7957c331b69e1444641d3193f",
+    "tokenizer": {
+      "chat_template_sha256": "64f85b198065d0fba2a81f37e10ed68161ce2c19a754c7100e67e0ca2ee9c326",
+      "eos_token_id": 151645,
+      "pad_token_id": 151643,
+      "path": "/home/hesong/AI-Agent-Projects/models/Qwen3-4B-Instruct-2507",
+      "sha256": "39284488ec59391d033b61d93ea674eb0638b33ed1ca3425cabbee4490e67cdd"
+    },
+    "train": {
+      "orbits": 1920,
+      "path": "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/prepared_data_v2/train.jsonl",
+      "records": 5760,
+      "sha256": "641bae95c4eb410229fb8c87a52b24e58628c376c636632d242115ca7e4d5c12"
+    }
+  },
+  "forbidden_access": {
+    "official_dev": true,
+    "official_test": true,
+    "shadow": true,
+    "withdrawn_v1": true
+  },
+  "hardware_lock": {
+    "BASE": {
+      "compute_capability": [
+        8,
+        0
+      ],
+      "cuda_visible_devices": "GPU-450cf636-944d-77be-781f-f082548d0fa5",
+      "driver_cuda_version": "12.4",
+      "driver_version": "550.144.03",
+      "name": "NVIDIA A800-SXM4-80GB",
+      "torch_cuda_version": "12.8",
+      "uuid": "GPU-450cf636-944d-77be-781f-f082548d0fa5"
+    },
+    "CONTROL": {
+      "compute_capability": [
+        8,
+        0
+      ],
+      "cuda_visible_devices": "GPU-0ab52f37-7476-c665-9824-28beace67d62",
+      "driver_cuda_version": "12.4",
+      "driver_version": "550.144.03",
+      "name": "NVIDIA A800-SXM4-80GB",
+      "torch_cuda_version": "12.8",
+      "uuid": "GPU-0ab52f37-7476-c665-9824-28beace67d62"
+    },
+    "HopPAIR": {
+      "compute_capability": [
+        8,
+        0
+      ],
+      "cuda_visible_devices": "GPU-f8764ffb-7e05-c537-ae22-3175575451eb",
+      "driver_cuda_version": "12.4",
+      "driver_version": "550.144.03",
+      "name": "NVIDIA A800-SXM4-80GB",
+      "torch_cuda_version": "12.8",
+      "uuid": "GPU-f8764ffb-7e05-c537-ae22-3175575451eb"
+    }
+  },
+  "hardware_preflight": {
+    "cuda_initialized_by_freezer": false,
+    "excluded_gpu": {
+      "assigned": false,
+      "index": "3",
+      "present": true,
+      "uuid": "GPU-a2f5b182-b0cd-f6f3-fafe-ccb93ebe5810"
+    },
+    "idle_memory_ceiling_mib": 1024,
+    "idle_utilization_ceiling_percent": 0,
+    "model_loaded": false,
+    "observations": {
+      "BASE": {
+        "compute_processes": 0,
+        "idle": true,
+        "index": "2",
+        "memory_used_mib": 13,
+        "utilization_percent": 0
+      },
+      "CONTROL": {
+        "compute_processes": 0,
+        "idle": true,
+        "index": "0",
+        "memory_used_mib": 13,
+        "utilization_percent": 0
+      },
+      "HopPAIR": {
+        "compute_processes": 0,
+        "idle": true,
+        "index": "1",
+        "memory_used_mib": 13,
+        "utilization_percent": 0
+      }
+    },
+    "same_model": true
+  },
+  "independent_redteam_signoff": {
+    "path": "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/protocols/pilot_v2_redteam_signoff.json",
+    "reviewer_id": "codex-independent-redteam-v2",
+    "sha256": "791088bc96491094ae08e7dea0e7612f69449e482d90b52ca3bf172760cdae4c"
+  },
+  "lora": {
+    "alpha": 32,
+    "bias": "none",
+    "coverage": "all_transformer_linear",
+    "dropout": 0.05,
+    "r": 16,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj",
+      "gate_proj",
+      "up_proj",
+      "down_proj"
+    ],
+    "task_type": "CAUSAL_LM"
+  },
+  "objectives": {
+    "CONTROL": {
+      "flip_weight": 0.0,
+      "kl_weight": 0.0
+    },
+    "HopPAIR": {
+      "flip_margin": 2.0,
+      "flip_weight": 0.2,
+      "kl_weight": 0.1
+    }
+  },
+  "output_roots": {
+    "base_dev_evaluation": "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/runs/pilot_v2_seed17/base_dev_evaluation",
+    "base_dev_generation": "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/runs/pilot_v2_seed17/base_dev_generation",
+    "control_dev_evaluation": "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/runs/pilot_v2_seed17/control_dev_evaluation",
+    "control_dev_generation": "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/runs/pilot_v2_seed17/control_dev_generation",
+    "control_train": "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/runs/pilot_v2_seed17/control_train",
+    "dev_comparison": "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/runs/pilot_v2_seed17/dev_comparison",
+    "hoppair_dev_evaluation": "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/runs/pilot_v2_seed17/hoppair_dev_evaluation",
+    "hoppair_dev_generation": "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/runs/pilot_v2_seed17/hoppair_dev_generation",
+    "hoppair_train": "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/runs/pilot_v2_seed17/hoppair_train"
+  },
+  "pre_gpu_gates": [
+    {
+      "name": "protocol_v2_exact",
+      "status": "PASS"
+    },
+    {
+      "name": "prepared_data_v2_release",
+      "status": "PASS"
+    },
+    {
+      "name": "train_dev_and_seed17_schedule_exact",
+      "status": "PASS"
+    },
+    {
+      "name": "model_tokenizer_content_identity",
+      "status": "PASS"
+    },
+    {
+      "name": "complete_production_source_lock",
+      "status": "PASS"
+    },
+    {
+      "name": "offline_cpu_tests_ruff_compileall",
+      "status": "PASS"
+    },
+    {
+      "name": "canonical_disjoint_fresh_output_roots",
+      "status": "PASS"
+    },
+    {
+      "name": "same_model_idle_gpu0_gpu1_gpu2_gpu3_excluded",
+      "status": "PASS"
+    },
+    {
+      "name": "forbidden_access_boundary",
+      "status": "PASS"
+    },
+    {
+      "name": "independent_redteam_P0_P1_zero",
+      "status": "PASS"
+    }
+  ],
+  "runtime": {
+    "arms": [
+      "CONTROL",
+      "HopPAIR"
+    ],
+    "attention_implementation": "sdpa",
+    "dataloader_num_workers": 0,
+    "effective_batch_orbits": 8,
+    "epochs": 1,
+    "generation": {
+      "batch_size": 1,
+      "do_sample": false,
+      "length_preflight_status": "PASS",
+      "max_new_tokens": 128,
+      "num_beams": 1,
+      "num_return_sequences": 1
+    },
+    "gpu_by_arm": {
+      "BASE": "GPU-450cf636-944d-77be-781f-f082548d0fa5",
+      "CONTROL": "GPU-0ab52f37-7476-c665-9824-28beace67d62",
+      "HopPAIR": "GPU-f8764ffb-7e05-c537-ae22-3175575451eb"
+    },
+    "gradient_accumulation_orbits": 8,
+    "gradient_checkpointing": true,
+    "group_microbatch_orbits": 1,
+    "learning_rate": 0.0002,
+    "lr_scheduler_type": "cosine",
+    "max_grad_norm": 1.0,
+    "max_length": 6144,
+    "no_resume": true,
+    "optimizer": "adamw_torch_fused",
+    "optimizer_steps": 240,
+    "precision": "bfloat16",
+    "schedule_algorithm": "sha256-sort-v1",
+    "seed": 17,
+    "single_gpu_per_process": true,
+    "states_per_orbit": 3,
+    "warmup_ratio": 0.03,
+    "warmup_steps": 8,
+    "weight_decay": 0.0
+  },
+  "schema_version": "support-orbit-musique.launch-receipt.v2",
+  "sealed_shadow_metadata": {
+    "body_opened": false,
+    "body_path": "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/prepared_data_v2/shadow.sealed.jsonl",
+    "body_size_bytes": 38568030,
+    "marker_path": "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/prepared_data_v2/SHADOW_SEALED.json",
+    "marker_sha256": "5e6288ef3d7e35ebd9c6c5d3812895f0a812106913b5fb357ae4e96052af5bd5",
+    "sidecar_path": "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/prepared_data_v2/shadow.sealed.jsonl.sha256",
+    "sidecar_sha256": "81570ec99e9f01f55c61050e46eb3a155d8579574fcbc72733457de0feefecb7",
+    "writer_sha256": "1eed3236bb17e79518ae5c3787f3171a37eaea1bfec8f6f46766a59ce2e1d293"
+  },
+  "source_lock": {
+    "build_data.py": "e8e2bdcba6c603515640cc13c1af88734d3a3b245c732db8e84790a35265e799",
+    "compare_dev.py": "ad47642c5aab9927ff24f45ad384bf1ca28335b06a102994a12a93e1b732040f",
+    "evaluate_dev.py": "2b45635421a9dc548655706ea3c419cc416ba279e5080b0b5cfa1078e51bc592",
+    "freeze_launch.py": "7426e4c172ae09bc64ed04f7d0c0055843896b73b6e6f008cc8a70575f0c82e8",
+    "generate_dev.py": "d8d32d2ec6f97220dcbbc8202aaf8a9db521f00544105df896b64ae17876cdfb",
+    "pyproject.toml": "e0ff5bb0032803ffad01aa31f7f8f612f4ae47a996af92b574e18b291864bf67",
+    "support_orbit_musique/__init__.py": "dfee75ca0b3e48b3e9718c842e6608476ab0789b84b845dbbe5c258ea283ab6a",
+    "support_orbit_musique/audit.py": "dd2e1fed66a00efada71172b782dd9aba651a8bc60e2ffade4a60a832e815f6d",
+    "support_orbit_musique/backend.py": "35061dbfd2c25259644f214e66e1346b258a99b2839c1997134b02aa4921639e",
+    "support_orbit_musique/cli.py": "c068bbc5fd0423face67bf3c6d9909ddae7d499c60577fbc888e1f632591e2d9",
+    "support_orbit_musique/data.py": "52ffdac624a9c32113577128e7a67e1809fe7568cb25fb828e9a3d0a7a2350a6",
+    "support_orbit_musique/evaluation.py": "4b7d99dee047903648069a669b9ef923706e035adcd835f99864bd65ca5759fa",
+    "support_orbit_musique/formatting.py": "77b4aa0ecea4ac91cb2deed417b3a445b4e0e21af2037fb7c667b46be4bf3e90",
+    "support_orbit_musique/generate.py": "55cd90f740a29ec66c1a9ac9365cbf145364f5812f57049f49ba27c232235887",
+    "support_orbit_musique/losses.py": "5213ee6038efb4351b4c8160737a18fb6ee6054ccc97334203ed797adfeea72d",
+    "support_orbit_musique/metrics.py": "6adad410da0b6bf4039721d6763bf33c5ff51e2f98861fef332ef05bed7597d4",
+    "support_orbit_musique/official_adapter.py": "d39d2693e4f99fb92d8ae04c3a5acbf198c85f4a3574ecc5cbc2b972de93e83a",
+    "support_orbit_musique/parsing.py": "9f9d2ad26b3852cc312d5b6e70bfc79d5d0341c3982121d7f1e9710c22114aea",
+    "support_orbit_musique/protocol.py": "fd2f679264af7e69dd830ea1da7f327c374b9495074ae51ae43b482b57220da5",
+    "support_orbit_musique/sft.py": "4ab85775034ca1a1b2d87b22496befa2f1cdf76c1b20af38d552c1c08edfd8f7",
+    "support_orbit_musique/train.py": "c456f9f6e687311ad334aae2e4900b62ad8f51ba13a065b2c6309786feb788fc",
+    "support_orbit_musique/trainer_core.py": "7bf44c021ae8a9d3859ed360c57af3e79f221fcb7f28fec33d436489a27b9c6b",
+    "tests/test_audit.py": "832f3ef4525188782dfd8f0d5601fa6b58988c2bf30d752f5ee6f5cfcd7b212c",
+    "tests/test_data.py": "e3707a10861ff862345e1f5925142e0a5533bd57955670ff79133deaf45660d9",
+    "tests/test_evaluation_core.py": "112d1b973c6cf32666929b96ee4a30a79765856ab14f14aac1e3f3e56b6b64ad",
+    "tests/test_launch_receipt.py": "e201c719cf1797fa5d0f196bd8ce068d7c5fcaeaf3307d9f6118b58caaa13cf2",
+    "tests/test_pipeline.py": "b0da7d7a3ae0aed2f0b29e3e974af21f4b46887042c57aa9d4e4d5c9d304d9a3",
+    "tests/test_protocol.py": "203b740d23a4e390560ee6608f409ef7f74ace0633713cf28c792fdeddae0ee5",
+    "tests/test_training_core.py": "9e6558cb7d86636cfafd9849d63224dcdb0f7a0ed9221b9a2a42a32a4349d7c1",
+    "train_arm.py": "9083a2e0996ef3b1b8e2838bbf156d249cea165a365eaa18a314158e6a67f27c"
+  },
+  "static_model_evidence": {
+    "base_model_manifest": {
+      "files": [
+        {
+          "path": "config.json",
+          "sha256": "5beea1a4a34c62782bfb2f911c606741a3bab8f92d80a118fa053c28af12e8ba",
+          "size_bytes": 727
+        },
+        {
+          "path": "configuration.json",
+          "sha256": "f888421726665e8a84b738eed42a64875aed79de8be7daade851ac8bf4c0cef9",
+          "size_bytes": 73
+        },
+        {
+          "path": "generation_config.json",
+          "sha256": "835fffe355c9438e7a25be099b3fccaa98350b83451f9fd2d99512e74f1ade48",
+          "size_bytes": 238
+        },
+        {
+          "path": "model-00001-of-00003.safetensors",
+          "sha256": "75311d91bb08cf0b882913da464a1e722a31fb44db35208663487efb7a3d8ed6",
+          "size_bytes": 3957900840
+        },
+        {
+          "path": "model-00002-of-00003.safetensors",
+          "sha256": "0b48adbb1f60e901153d91907ba11ce63bd4b8b584482e730f48808d055dfba1",
+          "size_bytes": 3987450520
+        },
+        {
+          "path": "model-00003-of-00003.safetensors",
+          "sha256": "7dd39ccca5e4de123c74c14af44c9bf2eb75df33b4614382af0134528e060d5d",
+          "size_bytes": 99630640
+        },
+        {
+          "path": "model.safetensors.index.json",
+          "sha256": "d6c42883a895dfef5b0080ed2116a1bcd764f558406b98923d675978a1abf29c",
+          "size_bytes": 32819
+        }
+      ],
+      "path": "/home/hesong/AI-Agent-Projects/models/Qwen3-4B-Instruct-2507",
+      "sha256": "789936fb833362da427b5452cadb1cd7a3fb018f42b8ccaa8f705fb929dfb37d"
+    },
+    "cuda_initialized": false,
+    "model_loaded": false,
+    "tokenizer_manifest": {
+      "files": [
+        {
+          "path": "merges.txt",
+          "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "size_bytes": 1671839
+        },
+        {
+          "path": "tokenizer.json",
+          "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "size_bytes": 11422654
+        },
+        {
+          "path": "tokenizer_config.json",
+          "sha256": "a62ff0a2472a0fa1b8eaabcb57c59b58afa42a22831dc141400b6e0cf2b65ce3",
+          "size_bytes": 9377
+        },
+        {
+          "path": "vocab.json",
+          "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+          "size_bytes": 2776833
+        }
+      ],
+      "path": "/home/hesong/AI-Agent-Projects/models/Qwen3-4B-Instruct-2507",
+      "sha256": "39284488ec59391d033b61d93ea674eb0638b33ed1ca3425cabbee4490e67cdd"
+    }
+  },
+  "status": "READY_FOR_GPU",
+  "test_evidence": {
+    "commands": [
+      {
+        "argv": [
+          "/home/hesong/AI-Agent-Projects/.venv-schematune/bin/python",
+          "-c",
+          "import torch, transformers, peft, accelerate, numpy, tokenizers, safetensors; assert not torch.cuda.is_initialized()"
+        ],
+        "returncode": 0,
+        "stderr_bytes": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_bytes": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "argv": [
+          "/home/hesong/AI-Agent-Projects/.venv-schematune/bin/python",
+          "-m",
+          "pytest",
+          "-q"
+        ],
+        "returncode": 0,
+        "stderr_bytes": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_bytes": 156,
+        "stdout_sha256": "f875e064966a2a0063738934eaaf1de3c895df8fa5a35d01c853bfa4ac9649a4"
+      },
+      {
+        "argv": [
+          "/home/hesong/.local/bin/ruff",
+          "check",
+          "."
+        ],
+        "returncode": 0,
+        "stderr_bytes": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_bytes": 19,
+        "stdout_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      {
+        "argv": [
+          "/home/hesong/AI-Agent-Projects/.venv-schematune/bin/python",
+          "-m",
+          "compileall",
+          "-q",
+          "-f",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/build_data.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/compare_dev.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/evaluate_dev.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/freeze_launch.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/generate_dev.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/support_orbit_musique/__init__.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/support_orbit_musique/audit.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/support_orbit_musique/backend.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/support_orbit_musique/cli.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/support_orbit_musique/data.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/support_orbit_musique/evaluation.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/support_orbit_musique/formatting.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/support_orbit_musique/generate.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/support_orbit_musique/losses.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/support_orbit_musique/metrics.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/support_orbit_musique/official_adapter.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/support_orbit_musique/parsing.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/support_orbit_musique/protocol.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/support_orbit_musique/sft.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/support_orbit_musique/train.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/support_orbit_musique/trainer_core.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/tests/test_audit.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/tests/test_data.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/tests/test_evaluation_core.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/tests/test_launch_receipt.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/tests/test_pipeline.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/tests/test_protocol.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/tests/test_training_core.py",
+          "/home/hesong/AI-Agent-Projects/projects/support_orbit_musique/train_arm.py"
+        ],
+        "returncode": 0,
+        "stderr_bytes": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_bytes": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "cuda_visible_devices": "",
+    "offline": true,
+    "passed": true,
+    "returncode": 0,
+    "source_lock_after_tests_sha256": "4009ed46316e3f5994003500f2dfa2bf6f99fbf7957c331b69e1444641d3193f",
+    "source_lock_before_tests_sha256": "4009ed46316e3f5994003500f2dfa2bf6f99fbf7957c331b69e1444641d3193f",
+    "source_lock_before_write_sha256": "4009ed46316e3f5994003500f2dfa2bf6f99fbf7957c331b69e1444641d3193f"
+  }
+}

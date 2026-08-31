@@ -1,0 +1,25 @@
+{
+  "access_boundary": {
+    "gpu_model_loaded": false,
+    "official_archive_opened": false,
+    "official_dev_opened": false,
+    "official_test_opened": false,
+    "shadow_body_opened": false,
+    "withdrawn_v1_data_body_opened": false
+  },
+  "created_at": "2026-08-14T15:10:39Z",
+  "findings": {
+    "P0": 0,
+    "P1": 0
+  },
+  "reviewed_dev_sha256": "84acfa99def02660aa74d836f07ff4219c0c838c29e19d7d335a126c7840b909",
+  "reviewed_manifest_sha256": "84e97c0eb189d664149822c1244436f0b97e69e3cbca7e16be8186df52a7dfc1",
+  "reviewed_protocol_sha256": "1a888808d4a09983d0e98d31f1668b2f5faf844dde3b44f4d5e863e555e0c33f",
+  "reviewed_schedule_sha256": "027c7d3eba760be6956060a487836088911ea5d7746e4fb5586f811c2c7c6ac4",
+  "reviewed_source_lock_sha256": "4009ed46316e3f5994003500f2dfa2bf6f99fbf7957c331b69e1444641d3193f",
+  "reviewed_train_sha256": "641bae95c4eb410229fb8c87a52b24e58628c376c636632d242115ca7e4d5c12",
+  "reviewer_id": "codex-independent-redteam-v2",
+  "reviewer_kind": "independent_redteam",
+  "schema_version": "support-orbit-musique.independent-redteam-signoff.v2",
+  "status": "APPROVED_FOR_RECEIPT_CREATION"
+}
